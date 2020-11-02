@@ -10,26 +10,34 @@ public class ServerTread implements Runnable {
 
     private Socket socket;
 
-    public ServerTread(Socket socket) {
+    private ServerMain serverMain;
+
+    public ServerTread(
+        Socket socket,
+        ServerMain serverMain) {
         this.socket = socket;
+        this.serverMain = serverMain;
     }
 
     @Override
     public void run() {
+
         try {
 
-            System.out.println("Client has connected.");
+            int clientNumber = serverMain.getClientNumber();
+
+            System.out.println("Client " + clientNumber + " has connected.");
             // I/O buffers
-            BufferedReader in_socket = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            BufferedReader inSocket = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             PrintWriter outSocket = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()),
                 true);
 
-            outSocket.println("Welcome what's your name?"); // sends welcome message to client
-            String message = in_socket.readLine();
+            outSocket.println("Welcome you are client number " + clientNumber + " what's your name? "); // sends welcome message to client
+            String message = inSocket.readLine();
             System.out.println("Client says: " + message);
 
             socket.close();
-            System.out.println("Socket is closed.");
+            System.out.println("Client " + clientNumber + " has disconnected.");
         } catch (Exception e) {
             e.printStackTrace();
         }
