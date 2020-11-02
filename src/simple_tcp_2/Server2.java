@@ -22,9 +22,10 @@ public class Server2 {
         PrintWriter outSocket = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()),
             true);
         String message;
-        int secretNumber = (int) (Math.random() * 10 + 1);
+        int secretNumber = (int)(Math.random() * 10 + 1);
+
         do {
-            outSocket.print("Guess a number [1 - 10]: ");
+            outSocket.println("Guess a number [1 - 10]: ");
             message = inSocket.readLine();
         } while (!(Integer.parseInt(message) == secretNumber));
 
