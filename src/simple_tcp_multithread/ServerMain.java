@@ -14,7 +14,8 @@ public class ServerMain {
         // infinite loop waiting for a new connection
         while (true) {
             Socket socket = serverSocket.accept();
-            ServerTread serverTread = new ServerTread(socket, this);
+            ServerTread serverTread = new ServerTread(socket,
+                this);
             Thread thread = new Thread(serverTread);
             thread.start();
         }
