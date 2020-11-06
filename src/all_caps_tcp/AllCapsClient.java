@@ -16,11 +16,16 @@ public class AllCapsClient {
         BufferedReader inSocket = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         PrintWriter outSocket = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()), true);
         Scanner stdIn = new Scanner(System.in);
+        String message = "";
+        System.out.println("To quit type 'EXIT'");
 
-        String message = inSocket.readLine();
-        System.out.println("Server says: " + message);
-        message = stdIn.nextLine();
-        outSocket.println(message);
+        do {
+            System.out.println("Welcome you are client number type a message to be capitalized.");
+            message = stdIn.nextLine().toUpperCase();
+            outSocket.println(message);
+            message = inSocket.readLine();
+            System.out.println("Result: " + message);
+        } while (!message.equals("EXIT"));
 
         socket.close();
         System.out.println("Socket closed.");
