@@ -1,4 +1,4 @@
-package all_caps_tcp;
+package reverse_string;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -6,17 +6,17 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-public class AllCapsThread implements Runnable {
+public class RSThread implements Runnable {
 
     private Socket socket;
 
-    private AllCapsServer allCapsServer;
+    private RSServer rSServer;
 
-    public AllCapsThread(
+    public RSThread(
         Socket socket,
-        AllCapsServer allCapsServer) {
+        RSServer rSServer) {
         this.socket = socket;
-        this.allCapsServer = allCapsServer;
+        this.rSServer = rSServer;
     }
 
     @Override
@@ -24,7 +24,7 @@ public class AllCapsThread implements Runnable {
 
         try {
 
-            int clientNumber = allCapsServer.getClientNumber();
+            int clientNumber = rSServer.getClientNumber();
 
             System.out.println("Client " + clientNumber + " has connected.");
             // I/O buffers
